@@ -12,13 +12,11 @@ namespace PatreonBetaServerStatus;
 
 public static class Program
 {
-    private static readonly HttpClient HttpClient = new();
+    public static readonly HttpClient HttpClient = new();
+    
+    public static readonly PeriodicTimer? Timer = new(TimeSpan.FromSeconds(Config.RefreshRate));
 
-    public static PeriodicTimer Timer => _timer ??= new PeriodicTimer(TimeSpan.FromSeconds(Config.RefreshRate));
-    private static PeriodicTimer? _timer;
-
-    public static DiscordWebhookClient? Client => _client ??= new();
-    private static DiscordWebhookClient? _client;
+    public static readonly DiscordWebhookClient? Client = new();
 
     public static DiscordWebhook? Webhook;
 
